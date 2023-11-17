@@ -1,0 +1,7 @@
+library(readxl)
+heart_data <- read_excel("C:/Users/Student/Desktop/Data Science Toolkit Dataset/heart_data.xlsx")
+View(heart_data)
+library(nnet)
+model <- multinom(heart_data$output~heart_data$age+heart_data$sex+heart_data$trtbps+heart_data$chol+heart_data$fbs+heart_data$restecg+heart_data$thalachh+heart_data$ca,data=heart_data,censored = 1)
+predictions = predict(model)
+results = data.frame(heart_data$output,predictions,(heart_data$output == predictions))
